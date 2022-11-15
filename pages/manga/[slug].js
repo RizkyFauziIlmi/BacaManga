@@ -19,7 +19,7 @@ export default function Manga({ datas }) {
                             <Image src={datas?.thumb} alt={datas?.title} width={['50vw', '50vw', '20vw', '20vw']} borderRadius={'0.5rem'} boxShadow={"dark-lg"} />
                         </Flex>
                         : <Flex flexDir={'column'} position={'relative'} overflow={'hidden'}>
-                            <Text bgColor={'yellow.500'} boxShadow={'lg'} position={"absolute"} top={5} right={-10} textAlign={'center'} width={'65%'} fontWeight={'bold'} p={'0.5rem'} transform={`rotate(40deg)`} >ONGOING</Text>
+                            <Text bgColor={'orange.400'} boxShadow={'lg'} position={"absolute"} textAlign={'center'} top={0} right={0} fontSize={['xs', 'sm', 'lg', 'lg']} width={'100%'} fontWeight={'bold'} p={'0.5rem'} transform={`translateX(35%) translateY(35%) rotate(45deg)`} >ONGOING</Text>
                             <Image src={datas?.thumb} alt={datas?.title} width={['50vw', '50vw', '20vw', '20vw']} borderRadius={'0.5rem'} boxShadow={"dark-lg"} />
                         </Flex>
                     }
