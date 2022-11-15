@@ -14,11 +14,11 @@ export default function Manga({ datas }) {
                 <Flex width={"80%"} overflowX={'hidden'} flexDir={'column'} p={'1rem'} height={'max-content'} alignItems={'center'}>
                     <Heading size={'lg'} textAlign={'center'} pb={'1rem'}>{datas?.title}</Heading>
                     {datas?.status === "End"
-                        ? <Flex flexDir={'column'} position={'relative'} overflow={'hidden'}>
+                        ? <Flex flexDir={'column'} boxShadow={'dark-lg'} position={'relative'} overflow={'hidden'}>
                             <Text bgColor={'red.700'} boxShadow={'lg'} position={"absolute"} textAlign={'center'} top={0} right={0} fontSize={['xs', 'sm', 'lg', 'lg']} width={'100%'} fontWeight={'bold'} p={'0.5rem'} transform={`translateX(35%) translateY(35%) rotate(45deg)`} >FINISHED</Text>
                             <Image src={datas?.thumb} alt={datas?.title} width={['50vw', '50vw', '20vw', '20vw']} borderRadius={'0.5rem'} boxShadow={"dark-lg"} />
                         </Flex>
-                        : <Flex flexDir={'column'} position={'relative'} overflow={'hidden'}>
+                        : <Flex flexDir={'column'} boxShadow={'dark-lg'} position={'relative'} overflow={'hidden'}>
                             <Text bgColor={'orange.400'} boxShadow={'lg'} position={"absolute"} textAlign={'center'} top={0} right={0} fontSize={['xs', 'sm', 'lg', 'lg']} width={'100%'} fontWeight={'bold'} p={'0.5rem'} transform={`translateX(35%) translateY(35%) rotate(45deg)`} >ONGOING</Text>
                             <Image src={datas?.thumb} alt={datas?.title} width={['50vw', '50vw', '20vw', '20vw']} borderRadius={'0.5rem'} boxShadow={"dark-lg"} />
                         </Flex>
