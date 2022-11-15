@@ -12,14 +12,14 @@ export default function PopularPage({ datas }) {
     return (
         <>
             <Head>
-                <title>Popular | {page}</title>
+                <title>{`Popular | ${page}`}</title>
             </Head>
-            <Flex flexDir={'column'} alignItems={'center'} overflowY={"auto"} height={'100vh'} p={'5rem'}>
-                <Grid templateColumns={'repeat(3, 1fr)'} gap={'1rem'}>
+            <Flex flexDir={'column'} alignItems={'center'} overflowY={"auto"} height={'100vh'} p={'3rem'}>
+                <Grid templateColumns={['repeat(1, 1fr)','repeat(2, 1fr)','repeat(3, 1fr)','repeat(3, 1fr)']}>
                     {datas?.manga_list.map((value, index) => {
                         return (
                             <GridItem key={index}>
-                                <Card value={value} />
+                                <Card value={value} url={`/manga/${value.endpoint}`}/>
                             </GridItem>
                         )
                     })}
@@ -144,12 +144,12 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
     const { params } = context
-    const response = await fetch(`https://manga-api-one.vercel.app/api/manga/popular/${params.page}`)
-    const datas = await response.json()
+    const response = await fetch(`https://manga-api-nine.vercel.app/api/manga/popular/${params.page}`)
+    const data = await response.json()
 
     return {
         props: {
-            datas
+            datas: data
         },
         revalidate: 60
     }

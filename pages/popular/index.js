@@ -13,12 +13,12 @@ export default function Popular({ datas }) {
             <Head>
                 <title>Popular</title>
             </Head>
-            <Flex flexDir={'column'} alignItems={'center'} overflowY={"auto"} height={'100vh'} p={'5rem'}>
-                <Grid templateColumns={'repeat(3, 1fr)'} gap={'1rem'}>
+            <Flex flexDir={'column'} alignItems={'center'} overflowY={"auto"} height={'100vh'} p={'3rem'}>
+                <Grid templateColumns={['repeat(1, 1fr)','repeat(2, 1fr)','repeat(3, 1fr)','repeat(3, 1fr)']} gap={'1rem'}>
                     {datas?.manga_list.map((value, index) => {
                         return (
                             <GridItem key={index}>
-                                <Card value={value} />
+                                <Card value={value} url={`/manga/${value.endpoint}`}/>
                             </GridItem>
                         )
                     })}
@@ -39,13 +39,13 @@ export default function Popular({ datas }) {
     )
 }
 
-export async function getStaticProps() {
-    const response = await fetch("https://manga-api-one.vercel.app/api/manga/popular/1")
-    const datas = await response.json()
+export async function getServerSideProps() {
+    const response = await fetch("https://manga-api-nine.vercel.app/api/manga/popular/1")
+    const data = await response.json()
 
     return {
         props: {
-            datas
+            datas: data
         }
     }
 }

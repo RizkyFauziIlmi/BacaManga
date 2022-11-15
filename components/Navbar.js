@@ -1,24 +1,57 @@
-import { Button, Flex, IconButton, Input, InputGroup, InputRightElement, VStack } from "@chakra-ui/react";
+import { Button, Drawer, DrawerCloseButton, DrawerBody, DrawerContent, DrawerOverlay, Flex, Heading, IconButton, Input, InputGroup, InputRightElement, useDisclosure, VStack } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useRef, useState } from "react";
+import { BsSearch } from 'react-icons/bs'
 
 export default function Navbar() {
     const router = useRouter()
     const [input, setInput] = useState("")
+    const btnRef = useRef()
+    const { isOpen, onOpen, onClose } = useDisclosure()
 
-    return(
-        <Flex flexDir={'column'} boxShadow={'dark-lg'} minWidth={'20%'} height={"100vh"} overflowY={'auto'} p={'1rem'}>
-            <InputGroup>
-                <Input type={'text'} placeholder="Search manga" onChange={(event) => setInput(event.target.value)}/>
-                <InputRightElement>
-                    <IconButton onClick={() => router.push(`/search/${input}`)}/>
-                </InputRightElement>
-            </InputGroup>
-            {input}
-            <Flex flexDir={'column'} gap={'0.5rem'} pt={'2rem'}>
-                <Button variant={router.pathname.includes("home") ? 'solid' : 'ghost'} onClick={() => router.push('/home')}>Home</Button>
-                <Button variant={router.pathname.includes("popular") ? 'solid' : 'ghost'} onClick={() => router.push('/popular')}>Popular</Button>
+    return (
+        <>
+            <Flex display={['none', 'none', 'flex', 'flex']} flexDir={'column'} boxShadow={'dark-lg'} minWidth={'20%'} height={"100vh"} overflowY={'auto'} p={'1rem'}>
+                <Heading size={'lg'} cursor={'pointer'} textAlign={'center'} p={'1rem'} onClick={() => router.push("/")}>BacaManga</Heading>
+                <InputGroup>
+                    <Input type={'text'} placeholder="Search manga" onChange={(event) => setInput(event.target.value)} />
+                    <InputRightElement>
+                        <IconButton icon={<BsSearch/>} onClick={() => router.push(`/search/${input}`)} />
+                    </InputRightElement>
+                </InputGroup>
+                <Flex flexDir={'column'} gap={'0.5rem'} pt={'2rem'}>
+                    <Button variant={router.pathname === "/" ? 'solid' : 'ghost'} onClick={() => router.push('/')}>Home</Button>
+                    <Button variant={router.pathname.includes("popular") ? 'solid' : 'ghost'} onClick={() => router.push('/popular')}>Popular</Button>
+                </Flex>
             </Flex>
-        </Flex>
+            <Flex alignItems={'center'} p={'1rem'} gap={'0.5rem'} boxShadow={'dark-lg'} display={['flex', 'flex', 'none', 'none']}>
+                <Heading cursor={'pointer'} size={'md'} onClick={() => router.push("/")}>BacaManga</Heading>
+                <InputGroup>
+                    <Input type={'text'} placeholder="Search manga" onChange={(event) => setInput(event.target.value)} />
+                    <InputRightElement>
+                        <IconButton icon={<BsSearch />} onClick={() => router.push(`/search/${input}`)} />
+                    </InputRightElement>
+                </InputGroup>
+                <IconButton ref={btnRef} onClick={onOpen} />
+                <Drawer
+                    isOpen={isOpen}
+                    placement='right'
+                    onClose={onClose}
+                    size={'xs'}
+                    finalFocusRef={btnRef}
+                >
+                    <DrawerOverlay />
+                    <DrawerContent>
+                        <DrawerCloseButton />
+                        <DrawerBody>
+                            <Flex flexDir={'column'} gap={'0.5rem'} pt={'2rem'}>
+                                <Button variant={router.pathname === "/" ? 'solid' : 'ghost'} onClick={() => router.push('/')}>Home</Button>
+                                <Button variant={router.pathname.includes("popular") ? 'solid' : 'ghost'} onClick={() => router.push('/popular')}>Popular</Button>
+                            </Flex>
+                        </DrawerBody>
+                    </DrawerContent>
+                </Drawer>
+            </Flex>
+        </>
     )
 }

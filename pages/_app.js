@@ -6,51 +6,48 @@ import { useEffect, useState } from 'react'
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter()
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const handleStart = (url) => {
-      if (url !== router.asPath) {
-        setLoading(true)
-      }
-    }
-
-    const handleComplete = (url) => {
-      if (url === router.asPath) {
-        setLoading(false)
-      }
-    }
-
-    router.events.on("routeChangeStart", handleStart)
-    router.events.on("routeChangeComplete", handleComplete)
-
+    const start = () => {
+      setLoading(true);
+    };
+    const end = () => {
+      setLoading(false);
+    };
+    router.events.on("routeChangeStart", start);
+    router.events.on("routeChangeComplete", end);
+    router.events.on("routeChangeError", end);
     return () => {
-      router.events.off("routeChangeStart", handleStart)
-      router.events.off("routeChangeComplete", handleComplete)
-    }
-  }, [router.asPath, router.events])
+      router.events.off("routeChangeStart", start);
+      router.events.off("routeChangeComplete", end);
+      router.events.off("routeChangeError", end);
+    };
+  }, [router.events]);
 
-  if (loading) {
-    return (
-      <ChakraProvider>
-        <Flex width={'100vw'} height={'100vh'}>
-          <Navbar />
-          <Flex width={"100%"} height={'100vh'} justifyContent={'center'} alignItems={'center'}>
-            <Spinner size={'xl'} />
+  return (
+    <>
+      {loading ? (
+        <ChakraProvider>
+          <Flex width={'100vw'} flexDir={['column', 'column', 'row', 'row']} height={'100vh'}>
+            <Navbar />
+            <Flex width={'100%'} height={'100vh'} justifyContent={'center'} alignItems={'center'}>
+              <Spinner size={'xl'}/>
+            </Flex>
           </Flex>
-        </Flex>
-      </ChakraProvider>
-    )
-  } else {
-    return (
-      <ChakraProvider>
-        <Flex width={'100vw'} height={'100vh'}>
-          <Navbar />
-          <Component {...pageProps} />
-        </Flex>
-      </ChakraProvider>
-    )
-  }
+        </ChakraProvider>
+      )
+        : (
+          <ChakraProvider>
+            <Flex width={'100vw'} flexDir={['column', 'column', 'row', 'row']} height={'100vh'}>
+              <Navbar />
+              <Component {...pageProps} />
+            </Flex>
+          </ChakraProvider>
+        )
+      }
+    </>
+  )
 }
 
 export default MyApp
