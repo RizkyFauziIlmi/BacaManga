@@ -1,13 +1,14 @@
-import { Button, Drawer, DrawerCloseButton, DrawerBody, DrawerContent, DrawerOverlay, Flex, Heading, IconButton, Input, InputGroup, InputRightElement, useDisclosure, VStack } from "@chakra-ui/react";
+import { Button, Drawer, DrawerCloseButton, DrawerBody, DrawerContent, DrawerOverlay, Flex, Heading, IconButton, Input, InputGroup, InputRightElement, useDisclosure, VStack, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
-import { BsSearch } from 'react-icons/bs'
+import { BsSearch, BsSun, BsMoon } from 'react-icons/bs'
 
 export default function Navbar() {
     const router = useRouter()
     const [input, setInput] = useState("")
     const btnRef = useRef()
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const { colorMode, toggleColorMode } = useColorMode() 
 
     return (
         <>
@@ -22,6 +23,7 @@ export default function Navbar() {
                 <Flex flexDir={'column'} gap={'0.5rem'} pt={'2rem'}>
                     <Button variant={router.pathname === "/" ? 'solid' : 'ghost'} onClick={() => router.push('/')}>Home</Button>
                     <Button variant={router.pathname.includes("popular") ? 'solid' : 'ghost'} onClick={() => router.push('/popular')}>Popular</Button>
+                    <IconButton icon={colorMode === "dark" ? <BsSun /> : <BsMoon />} onClick={toggleColorMode} variant={'outline'} />
                 </Flex>
             </Flex>
             <Flex alignItems={'center'} p={'1rem'} gap={'0.5rem'} boxShadow={'dark-lg'} display={['flex', 'flex', 'none', 'none']}>
@@ -47,6 +49,7 @@ export default function Navbar() {
                             <Flex flexDir={'column'} gap={'0.5rem'} pt={'2rem'}>
                                 <Button variant={router.pathname === "/" ? 'solid' : 'ghost'} onClick={() => router.push('/')}>Home</Button>
                                 <Button variant={router.pathname.includes("popular") ? 'solid' : 'ghost'} onClick={() => router.push('/popular')}>Popular</Button>
+                                <IconButton icon={colorMode === "dark" ? <BsSun /> : <BsMoon />} onClick={toggleColorMode} variant={'outline'} />
                             </Flex>
                         </DrawerBody>
                     </DrawerContent>
