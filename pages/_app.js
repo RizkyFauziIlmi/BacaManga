@@ -3,6 +3,7 @@ import '../styles/globals.css'
 import { ChakraProvider, Flex, Spinner } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import Head from 'next/head'
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter()
@@ -29,6 +30,9 @@ function MyApp({ Component, pageProps }) {
     <>
       {loading ? (
         <ChakraProvider>
+          <Head>
+            <title>Loading...</title>
+          </Head>
           <Flex width={'100vw'} flexDir={['column', 'column', 'row', 'row']} height={'100vh'}>
             <Navbar />
             <Flex width={'100%'} height={'100vh'} justifyContent={'center'} alignItems={'center'}>

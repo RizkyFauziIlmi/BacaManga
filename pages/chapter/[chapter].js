@@ -10,7 +10,7 @@ export default function Chapter({ datas }) {
     return (
         <>
             <Head>
-                <title>{datas?.chapter_endpoint.replace(`"`, "")}</title>
+                <title>{datas?.chapter_endpoint.replace(`"`, "").replace("/", "")}</title>
             </Head>
             <Flex width={'100%'} justifyContent={'center'} overflowY={"auto"}>
                 {console.log(datas)}
