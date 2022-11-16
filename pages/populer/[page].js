@@ -12,7 +12,7 @@ export default function PopularPage({ datas }) {
     return (
         <>
             <Head>
-                <title>{`Popular | ${page}`}</title>
+                <title>{`Populer | ${page}`}</title>
             </Head>
             <Flex flexDir={'column'} alignItems={'center'} overflowY={"auto"} height={'100vh'} p={'3rem'}>
                 <Grid templateColumns={['repeat(1, 1fr)','repeat(2, 1fr)','repeat(3, 1fr)','repeat(3, 1fr)']}>
@@ -27,12 +27,12 @@ export default function PopularPage({ datas }) {
                 <Flex gap={'0.5rem'} p={'2rem'}>
                     <IconButton isDisabled={currentPage <= 1 ? true : false} onClick={() => {
                         setCurrentPage(currentPage - 1)
-                        router.push(`/popular/${currentPage - 1}`)
+                        router.push(`/populer/${currentPage - 1}`)
                     }} />
                     <Heading>{currentPage}</Heading>
                     <IconButton isDisabled={currentPage >= 29 ? true : false} onClick={() => {
                         setCurrentPage(currentPage + 1)
-                        router.push(`/popular/${currentPage + 1}`)
+                        router.push(`/populer/${currentPage + 1}`)
                     }} />
                 </Flex>
             </Flex>

@@ -22,7 +22,8 @@ export default function Navbar() {
                 </InputGroup>
                 <Flex flexDir={'column'} gap={'0.5rem'} pt={'2rem'}>
                     <Button variant={router.pathname === "/" ? 'solid' : 'ghost'} onClick={() => router.push('/')}>Home</Button>
-                    <Button variant={router.pathname.includes("popular") ? 'solid' : 'ghost'} onClick={() => router.push('/popular')}>Popular</Button>
+                    <Button variant={router.pathname.includes("populer") ? 'solid' : 'ghost'} onClick={() => router.push('/populer')}>Populer</Button>
+                    <Button variant={router.pathname.includes("rekomendasi") ? 'solid' : 'ghost'} onClick={() => router.push('/rekomendasi')}>Rekomendasi</Button>
                     <IconButton icon={colorMode === "dark" ? <BsSun /> : <BsMoon />} onClick={toggleColorMode} variant={'outline'} />
                 </Flex>
             </Flex>
@@ -48,7 +49,8 @@ export default function Navbar() {
                         <DrawerBody>
                             <Flex flexDir={'column'} gap={'0.5rem'} pt={'2rem'}>
                                 <Button variant={router.pathname === "/" ? 'solid' : 'ghost'} onClick={() => router.push('/')}>Home</Button>
-                                <Button variant={router.pathname.includes("popular") ? 'solid' : 'ghost'} onClick={() => router.push('/popular')}>Popular</Button>
+                                <Button variant={router.pathname.includes("populer") ? 'solid' : 'ghost'} onClick={() => router.push('/populer')}>Populer</Button>
+                                <Button variant={router.pathname.includes("rekomendasi") ? 'solid' : 'ghost'} onClick={() => router.push('/rekomendasi')}>Rekomendasi</Button>
                                 <IconButton icon={colorMode === "dark" ? <BsSun /> : <BsMoon />} onClick={toggleColorMode} variant={'outline'} />
                             </Flex>
                         </DrawerBody>

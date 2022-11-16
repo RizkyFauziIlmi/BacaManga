@@ -18,7 +18,7 @@ export default function Card({ value, url }) {
                     }
                 }} size={'sm'} pt={'0.5rem'}>{value.title}</Heading>
                 <Flex flexDir={'column'} pt={'0.3rem'} pb={'1rem'}>
-                    <Text>Type: {value?.type}</Text>
+                    <Text>{value?.type ? `type: ${value?.type}` : ""}</Text>
                     <Text>{value?.upload_on || value?.updated_on}</Text>
                 </Flex>
             </Flex>
